@@ -9,5 +9,5 @@ def action(request):
     data = {}
     data["id"] = 1
     data["username"] =  "Alpha"
-    data["greet"] = "Hi, "+str(request.POST.get("command"))
+    data["greet"] = "Hi, "+str(request.GET.get("command"))
     return JsonResponse(data)
