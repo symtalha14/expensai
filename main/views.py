@@ -102,7 +102,7 @@ def showRecords(request):
     records = ExpenseRecord.objects.filter(username = username, month=month)
     data = {}
     data["action"] = "LIST_EXPENSES"
-    data["list"] = json.dumps(data, True)
+    data["list"] = json.dumps(records)
     return JsonResponse(data)
 
 
