@@ -108,7 +108,8 @@ def showRecords(request):
     data["action"] = "LIST_EXPENSES"
     data["list"] = return_records
     return JsonResponse(data, safe=False)
-
+def privacy(request):
+    return render(request, "html/privacy.html")
 
 
 
