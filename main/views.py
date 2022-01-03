@@ -78,9 +78,32 @@ def addRecord(request):
     data["reply"] = "Hooray! Item added to your expense records."
     return JsonResponse(data)
 
-# def showRecord(request):
-#     username = request.GET["username"]
-#     month = request.GET["month"]
+MONTHS_INDEX={
+    "JAN":1,
+    "FEB":2,
+    "MAR":3,
+    "APR":4,
+    "MAY":5,
+    "JUN":6,
+    "JUL":7,
+    "AUG":8,
+    "SEP":9,
+    "OCT":10,
+    "NOV":11,
+    "DEC":12
+}
+
+def showRecords(request):
+    username = request.GET["username"]
+    month = request.GET["month"]
+    month = predict(month)
+    if len(month)==3:
+        month = MONTHS_INDEX[month]
+    records = ExpenseRecord.objects.filter(username = username, month=month)
+    data = {}
+    data["action"] = "LIST_EXPENSES"
+    data["list"] = records
+    return JsonResponse(data)
 
 
 
