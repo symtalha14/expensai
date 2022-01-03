@@ -97,6 +97,7 @@ def showRecords(request):
     username = request.GET["username"]
     month = request.GET["month"]
     month = predict(month)
+    month = month[1]
     temp = month
     if len(month)==3:
         month = MONTHS_INDEX[month]
