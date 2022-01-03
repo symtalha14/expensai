@@ -102,10 +102,11 @@ def showRecords(request):
     if len(month)==3:
         month = MONTHS_INDEX[month]
     records = ExpenseRecord.objects.filter(username = username, month=month)
+    return_records = [{"item_name":str(r.comments), "item_amount":str(r.amount), "date":str(r.date)} for r in records]
     data = {}
     data["month"] = temp
     data["action"] = "LIST_EXPENSES"
-    data["list"] = list(records)
+    data["list"] = return_records
     return JsonResponse(data, safe=False)
 
 
