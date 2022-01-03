@@ -103,7 +103,7 @@ def showRecords(request):
     data = {}
     data["action"] = "LIST_EXPENSES"
     data["list"] = records
-    return JsonResponse(data)
+    return JsonResponse(json.dump(data))
 
 
 
