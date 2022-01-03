@@ -57,6 +57,9 @@ def action(request):
     if output[0] == "ADD_EXPENSE":
         data["action"] = "ADD_EXPENSE"
         data["reply"] = output[1]
+    elif output[0] == "SHOW_EXPENSES":
+        data["action"] = "SHOW_EXPENSES"
+        data["reply"] = output[1]
     else:
         data["action"] = "REPLY"
         data["reply"] = output[1]
