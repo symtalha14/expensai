@@ -1,0 +1,110 @@
+{
+    "intents":[
+        {
+            "tag":"greetings",
+            "patterns":[
+                "Hello", "Hey", "Hi, Who are you?", "Hi", "Hi, how are you", "Hi, Can you help me?", "Hi, Who are you?"
+            ],
+            "responses":["Hi, I am ExpenseAI! I am your personal Expenses Manager. Looking forward to help you out :)",
+                        "Hello there! It's a nice day today. I am ExpenseAI, your personal Expenses Manager. I would be pleased to help you :)",
+                        "Hey, Hope your are doing good! I am ExpenseAI and I am here to help you out managing your expenses."
+                    ]
+
+        },
+        {
+            "tag":"Developer Info",
+            "patterns":["Who made you?", "About your creator made", "developer who made you", "creator who made you", "Who is your made developer?", "Who designed you?"],
+            "responses":["Hi, Syed Mohammad Talha made me in Jan'2022.", "I was designed by Syed Mohammad Talha in Jan'22", "My creator is Syed Mohammad Talha"]
+        },
+        {
+            "tag":"ADD_EXPENSE",
+            "patterns":["Add an expense", "ADD", "I bought something", "Please add this", "Create an expense", "New expense", "New item", "Bought something"],
+            "responses":["Ok, let me start by asking a few details", "Sure, I will add it for you"]
+        },
+        {
+            "tag":"SHOW_EXPENSES",
+            "patterns":["View my expenses", "list expenses", "Show my expenses", "List my expenses", "expenses", "view expenses", "view items i bought", "what are my expenses", "tell my expenses"],
+            "responses":["Sure! Please tell me for which month you want to fetch the expenses."]
+        },
+        {
+            "tag":"JAN",
+            "patterns":["jan", "january", "janwary"],
+            "responses":["JAN"]
+        },
+        {
+            "tag":"FEB",
+            "patterns":["feb", "february", "febrary"],
+            "responses":["FEB"]
+        },
+        {
+            "tag":"MAR",
+            "patterns":["Mar", "March"],
+            "responses":["MAR"]
+        },
+        {
+            "tag":"APR",
+            "patterns":["Apr", "April", "Aprl"],
+            "responses":["APR"]
+        },
+        {
+            "tag":"May",
+            "patterns":["May", "My"],
+            "responses":["MAY"]
+        },
+        {
+            "tag":"JUN",
+            "patterns":["june", "joon"],
+            "responses":["JUN"]
+        },
+        {
+            "tag":"JUL",
+            "patterns":["july", "jul", "julai"],
+            "responses":["JUL"]
+        },
+        {
+            "tag":"AUG",
+            "patterns":["aug", "august", "augast"],
+            "responses":["AUG"]
+        },
+        {
+            "tag":"SEP",
+            "patterns":["sep", "september", "septmbr"],
+            "responses":["SEP"]
+        },
+        {
+            "tag":"OCT",
+            "patterns":["october", "oct", "auctober"],
+            "responses":["OCT"]
+        },
+        {
+            "tag":"NOV",
+            "patterns":["nov", "november", "nuvember"],
+            "responses":["NOV"]
+        },
+        {
+            "tag":"DEC",
+            "patterns":["dec", "december", "decaimbr"],
+            "responses":["DEC"]
+        },
+        {
+            "tag":"Savings",
+            "patterns":["Show my savings", "How much i saved?", "Do you know my savings", "Can you tell me my savings?", "Savings"],
+            "responses":["Sure! Please tell me for which month you want to check the savings."]
+        },
+        {
+            "tag":"Good morning",
+            "patterns":["Good morning", "Gm", "Good mor", "mrning", "Morning"],
+            "responses":["A very Good morning to you!"]
+        },
+        {
+            "tag":"Good evening",
+            "patterns":["Good evening", "Evening", "Ge", "Evning"],
+            "responses":["A very Good evening to you!"]
+        },
+        {
+            "tag":"Good afternoon",
+            "patterns":["Good afternoon", "Afternoon", "aftern"],
+            "responses":["A very Good afternoon to you!"]
+        }
+    ]
+}

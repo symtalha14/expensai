@@ -1,13 +1,84 @@
+from datetime import date, datetime
 from django.http.response import JsonResponse
 from django.shortcuts import render
+import random
+import json
+import torch
+from main.models import ExpenseRecord
+from nlp.model import NeuralNet
+from nlp.nltk_utils import bag_of_words, tokenize
 
 # Create your views here.
 from django.http import HttpResponse
 
 
+def predict(sentence):
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+    with open("./nlp/intents.json", "r") as f:
+        intents = json.load(f)
+
+    FILE = "./nlp/data.pth"
+
+    data = torch.load(FILE)
+    input_size = data["input_size"]
+    output_size = data["output_size"]
+    hidden_size = data["hidden_size"]
+    all_words = data["all_words"]
+    tags = data["tags"]
+    model_state = data["model_state"]
+
+    model = NeuralNet(input_size, hidden_size, output_size).to(device)
+    model.load_state_dict(model_state)
+    model.eval()
+    sentence = tokenize(sentence)
+    X = bag_of_words(sentence, all_words)
+    X = X.reshape(1, X.shape[0])
+    X = torch.from_numpy(X)
+
+    output = model(X)
+
+    _, predicted = torch.max(output, dim=1)
+    tag = tags[predicted.item()]
+
+    probs = torch.softmax(output, dim=1)
+    prob = probs[0][predicted.item()]
+
+    if prob.item() > 0.5:
+        for intent in intents["intents"]:
+            if tag == intent["tag"]:
+                return [intent["tag"], random.choice(intent["responses"])]
+
+
 def action(request):
     data = {}
-    data["id"] = 1
-    data["username"] =  "Alpha"
-    data["greet"] = "Hi, "+str(request.GET.get("command"))
+    command = str(request.GET["command"])
+    output = predict(command)
+    if output[0] == "ADD_EXPENSE":
+        data["action"] = "ADD_EXPENSE"
+        data["reply"] = output[1]
+    else:
+        data["action"] = "REPLY"
+        data["reply"] = output[1]
     return JsonResponse(data)
+
+
+def addRecord(request):
+    item_name = request.GET["item_name"]
+    item_cost = request.GET["item_cost"]
+    username = request.GET["username"]
+    new_expense = ExpenseRecord(username=username, amount=item_cost, currency="INR", date_time=datetime.now(
+    ), date=date.today(), month=date.today().month, year=date.today().year, category="GENERAL", comments = item_name)
+    new_expense.save()
+    data = {}
+    data["action"] = "REPLY"
+    data["reply"] = "Hooray! Item added to your expense records."
+    return JsonResponse(data)
+
+# def showRecord(request):
+#     username = request.GET["username"]
+#     month = request.GET["month"]
+
+
+
+
