@@ -109,9 +109,9 @@ def showRecords(request):
     data["list"] = return_records
     return JsonResponse(data, safe=False)
 
-    
+
 def privacy(request):
-    return render(request, "html/privacy.html")
+    return render(request, "privacy.html")
 
 
 
